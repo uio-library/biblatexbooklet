@@ -1,0 +1,1047 @@
+\documentclass[11pt,english,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel,csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{relsize}
+\usepackage[hyphens]{url}
+
+% illustrasjonene er laget i powerpoint i filen illustrasjoner.ppt
+% og kan revideres der.
+
+
+% her kommer biblatex-tingene
+% sjekk evt for definisjoner
+% /local/store/localhost/.texmf-ctan-biblatex/ver-2.4/opt/texlive/texmf-local/tex/latex/biblatex  
+\usepackage[%
+backend=biber,%
+style=numeric,%
+sorting=none,%
+hyperref=true,%
+backref,%
+date=long,%
+urldate=short%
+]{biblatex}
+
+\addbibresource{referanser.bib}
+% local redefinitions
+\DefineBibliographyStrings{english}{%
+urlseen={Seen: },
+%andre muligheter:
+%bibliography = {Bibliografi},
+%references = {Referanser},
+%editor = {redaktør},
+%translator={oversetter},
+%page={side},
+%pages={sidene},
+%and={og},
+}
+
+% I will define the prefix for URLs myself
+\DeclareFieldFormat{url}{\url{#1}} 
+\DeclareUrlCommand\url{\def\UrlLeft{\newline}\def\UrlRight{\newline}%
+\urlstyle{sf}} % setter inn passende linjeskift
+
+% biblatex recommends that the hyperref package is loaded after biblatex
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+
+% her er mine spesialkommandoer
+\newcommand{\kdo}[1]{\texttt{#1}}
+%\newcommand{\pil}{$>\ $}
+\newcommand{\pil}{ > }
+\newcommand{\prikk}{$\bullet\ $}
+\newcommand{\en}{EndNote{}}
+\newcommand{\bt}{BibTeX{}}
+\newcommand{\blt}{B{\smaller[2]IB}\discretionary{-}{}{\kern
+    -0.12em}\LaTeX{}}
+\newcommand{\underskrift}[1]{\vspace{.3cm}\noindent\textbf{#1}\newline}
+\newcommand{\flipp}{\vspace{0.1cm}\newline\indent}
+\newcommand{\mnd}{Mandatory}
+\title{\blt -- course notes}
+\author{Science library. Informatics\\ University of Oslo}
+%\date{January 24th, 2014}
+\begin{document}
+
+\maketitle{}
+\begin{center}
+ {\footnotesize Coloured texts are links.}
+\end{center}
+
+\tableofcontents
+\newpage
+\section*{Preface}
+This paper deals with the practical exercises in the \blt{}-course and
+saves you some note taking during the course. The exercises will help
+you build the bibliography given in the article entitled \textit{User
+  interface} from Encyclopedia of computer science\cite{jacob00-2}.
+
+% \section{Bibliographies and reference lists}
+% You may want to skip this section and go directly to section~\ref{blt}
+
+% \subsection*{What is a bibliography?}
+% A bibliography is a list of literature sharing some common
+% aspect. This might be a person, a subject, an area (national
+% bibliographies) and others.
+
+% \begin{itemize}
+% \item Within computer science there are a lot of bibliographies
+%   covering the different parts of the field. Many of these
+%   bibliographies are available in the service  \textit{The
+%     Collection of Computer Science Bibliographies}\cite{achilles}.
+
+% This service contains bibliographies in many categories:
+% \textit{Artificial Intelligence, Compiler Technology, Programming
+%   Languages and Type Theory, Database Research, Distributed Systems,
+%   Networking and Telecommunications, Computer Graphics and Vision,
+%   Logic Programming, (Computational) Mathematics, Neural Networks,
+%   \ldots}
+
+% All together more than 3~000~000 records (duplicates included).
+% \item\textit{Digital Bibliography \& Library Project} (DBLP -see our
+%   home page) contains mainly journal articles, conference
+%   papers and links to the home pages of computer scientists.
+
+% \item\textit{National bibliographies} are another type of
+%   bibliography. They cover all that is published within a country.
+% \item\textit{Person bibliographies} usually cover all that is written
+%   by and about a certain person.
+% \end{itemize}
+
+\subsection*{What is a reference list? Why refer?}
+Without a reference list, a thesis is not finished. When working with
+research you always base your work more or less on previous works done
+by others. If you don't cite them when you do, it will be considered
+theft or plagiarism.
+
+The reference list in your thesis should contain information on
+\textit{every} document that you either cite, are referring to or from
+which you use ideas, definitions, illustrations, graphs, statistics or
+other results.
+
+When giving definitions of concepts you should always cite the source,
+because this tells the reader what context you operate within.
+
+The body text must contain \textit{citations} which are pointers to
+the reference list. The reference list contains all the information
+that is necessary to locate and access the source.
+
+Now, how far should you go in citing? This varies from discipline to
+discipline. If in doubt discuss this with your supervisor.
+
+What might be considered as common knowledge, like the
+fact that the earth moves around the sun\cite{copernicus}, need not be
+cited. What is common knowledge in one discipline, might not be in
+another. It also depends on for whom you are writing.
+
+You should aim to cite the primary source. A secondary source might
+not have understood or cited the primary source correctly. Ensure
+yourself that you understand your source and that you express the
+source correctly.
+
+\subsection*{The importance of consistent and correct references}
+The purpose of the reference list is to show the reader on which
+previous research your own work is based and to give the readers of
+your work a chance to evaluate it.
+
+This means that references must contain the necessary and sufficient
+information elements to identify and locate the described document.
+
+This course deals with the question of making a proper reference list
+using the tool \blt.
+
+%\CYRM\CYRO\CYRS\CYRK\CYRV\CYRA
+
+\section{The bib-file and Emacs}\label{blt}
+\subsection{Literature}
+The IFI departement has published a short guide to \blt\
+\cite{langmyhr13}. If you want to dive into it, you may read the
+\blt{} package documentation\cite{biblatex}.
+
+% You will find English texts on \bt\ in
+% \cite{kopka95,kopka04,syropoulos02} which may be borrowed from the
+% library.
+
+A wiki-book on \LaTeX\ includes a useful page on \bt\
+\cite{wikibook} with a short  description of \blt.
+
+% \subsection{GUI for BibTeX}
+% You will find several tools for handling \bt-references on the
+% net. Among these are:
+% \begin{itemize}
+% \item\textit{JabRef} which you can download from
+% \url{http://jabref.sourceforge.net/}. It is written in Java and is
+% said to run on Windows, Mac and Linux.
+% \item\textit{Zotero} is an elegant add-on for the Firefox web
+%   browser. It may be downloaded from \url{http://www.zotero.org}. The
+%   add-on may be used for collecting and editing references downloaded
+%   from web pages. Zotero may export references in \bt-syntax to a
+%   bib-file which may be used with \LaTeX.
+
+% Zotero was also mentioned in the master introduction lecture, you will
+% find the slides via\newline
+% \url{http://tinyurl.com/ifibib}
+
+% \end{itemize}
+
+\subsection{The bib-file}
+References are collected in a file with the extension
+\textit{bib}. The connection between the \LaTeX{} file and the
+references in the bib-file is established by using identifiers (see
+below). 
+
+The bib-file may reside in the same file folder as the \LaTeX{}
+file or you may put it in the file folder \verb=~/texmf/bibtex/bib=
+where \blt\ always will find it.
+
+\subsection{Emacs}
+Create a folder called \textit{biblatexcourse} in your home directory
+and locate yourself to this folder. Under Linux it looks like this:
+
+\verb=       > mkdir biblatexcourse =
+
+\verb=       > cd biblatexcourse =
+
+\noindent{}Open a file named \textit{myreferences.bib} in Emacs by giving the
+command\footnote{Under Windows, select \textit{emacs.exe} from the program menu}:
+
+\verb=       > emacs myreferences.bib & =
+
+\noindent{}Emacs uses a certain \bt-mode when you open a bib-file. You will see a menu called \textit{Entry-Types}. When you want to
+enter a new reference in your bib-file, you choose reference type from
+this menu. The last option in this menu is \bt-dialect. The default selection of document types and fields are \bt, but may be changed to \blt\ by using the last choice in the \textit{Entry-types} menu (from version 24.2 of Emacs). Select \blt.
+
+After chosing a reference type you will see a list of empty fields,
+like this (\textit{article in journal} or Ctrl-c Ctrl-e
+Ctrl-a): 
+
+{\footnotesize\begin{verbatim}
+    @Article{,
+      author =       {},
+      title =        {},
+      journaltitle = {},
+      year =         {},
+      OPTkey =       {},
+      OPTvolume =    {},
+      OPTnumber =    {},
+      OPTpages =     {},
+      OPTmonth =     {},
+      OPTnote =      {},
+      OPTannote =    {}
+    }
+\end{verbatim}}
+
+
+
+\subsection*{Identifiers}
+Every reference in the bib-file must include a unique identifier. It
+must be entered directly following the first curly brace. A comma concludes
+the identifier.
+
+As you are going to use this identifier when citing in your main
+\LaTeX-document you should construct it easy to memorize, like:
+\textit{shneiderman1983} and \textit{olsen1992}.
+
+\subsection*{Fields}
+The fields prefixed with \textit{OPT} are optional, the others are
+mandatory. Sometimes two or more fields are prefixed with
+\textit{ALT}. You must enter data into exactly one of them.
+
+The text in the fields must be surrounded by quotes (\verb=" "=) or curly
+braces (\verb={}=). There are two exceptions: you may enter clean
+numbers (a four digit
+year) and macros. See section~\ref{macros}.
+
+The fields are separated by comma.
+
+\subsection*{The author field}
+The name should be entered straight forward or with the last name
+first followed by a comma and then the rest of the name.
+
+\blt{} will try to split a straight forward name into four parts:
+first name, middle names like \textit{von, van, de, \ldots}, last name
+and finally additions like \textit{junior, senior, \ldots}. This
+procedure doesn't always succeed, so the safest way is to enter the
+last name followed by comma.
+
+Several authors must be separated by the word \textbf{and}.
+
+Initials in names should be enteres with a period and a space, like
+this: \texttt{Knuth, D. E.}.
+
+These rules holds true also for other personal name fields: \textbf{editor,
+ translator,\ldots}.
+
+In general, you should try to enter the full names and no
+initials. The bibliographic style will decide whether the names will
+be presented with initials or not. If you do not know the full name, try normalising.
+
+\subsection*{Uppercase letters}
+Information in some of the fields will be edited according to the
+style you have chosen. Uppercase letters might be converted to
+lowercase. If you want to keep your own layout (e.g. acronyms like ACM
+and IEEE or person names in titles) put curly braces around
+your text.
+
+\subsection{Macros\label{macros}}
+Some information occurs often. It may be journal titles, publisher
+names, personal names and so on. To save typing and to ensure
+consistency you may use \textit{macros} or \textit{aliases}. The definition of the macro
+must appear in the beginning of the bib-file. Examples:
+
+{\footnotesize
+\begin{verbatim}
+    @string{ben   = "Ben Shneiderman"}
+    @string{ojd   = "Ole-Johan Dahl"}
+    @string{tochi = "ACM Transactions on Computer-Human Interaction"}
+    @string{aw    = "Addison-Wesley"}
+\end{verbatim}
+}
+
+\noindent{}It is not possible to use two or more name macros in the 
+author field. You will have to define a macro combining the 
+names\footnote{See an example in the tex-file later in this course.}.
+
+When the above macros are defined,  you might enter (without curly braces or quotes):
+
+{\footnotesize\begin{verbatim}
+    author = ojd,
+    editor = ben,
+    journaltitle = tochi,
+    publisher = aw,
+\end{verbatim}}
+
+\noindent{}The macros will be expanded during the  processing.
+
+
+\subsection{The most important reference types}
+
+We will only comment on the reference types most used. For each type
+we list mandatory fields and some
+recommended fields. In most cases the program \textbf{biber} will convert \bt\ data to
+\blt\footnote{The databases from which we will fetch references still
+  only support the \bt\ format.}.
+
+\underskrift{Article in journal} 
+\indent\begin{tabular}{ll}
+\mnd:&\textit{author, title, journaltitle, year}\\
+%\bt: &\textit{author, title, journal, year}\\
+Recommended:& \textit{volume, number, pages}.\\
+\end{tabular}
+
+\underskrift{Book}
+\indent\begin{tabular}{ll}
+\mnd:&\textit{author, title, year/date}\\
+When needed: &\textit{edition}\\
+%\bt: &\textit{title, publisher, year} and one of\\ &\textit{author} or \textit{editor}\\ 
+\end{tabular}
+
+\underskrift{InBook}
+\noindent{}A part of a book which forms a self-contained unit with its own title.
+\flipp\begin{tabular}{ll}
+\mnd:&\textit{author, title, booktitle, year/date}.\\
+%\bt: &\textit{author/editor, title, chapter, publisher, year}.\\
+Recommended: &\textit{publisher,  pages}.\\ 
+\end{tabular}
+
+\underskrift{Collection}
+\noindent{}This type is not used in \bt.
+\flipp\begin{tabular}{ll}
+\mnd:&\textit{editor, title, year/date}\\
+Recommended&\textit{publisher}\\ 
+\end{tabular}
+
+\underskrift{InCollection -- Chapter in book}
+\noindent{}The type is meant for self-contained contributions 
+in a collection. The contribution has its own author and title. 
+The author refers to the title, the editor to the booktitle.
+\flipp\begin{tabular}{ll}
+\mnd:&\textit{author, editor, title, booktitle, year/date}. \\
+%\bt: &\textit{author, title, booktitle}. \\
+Recommended: &\textit{publisher, year}.\\ 
+\end{tabular}
+
+\underskrift{Proceedings}
+\indent\begin{tabular}{ll}
+\mnd:&\textit{title, year/date}. \\
+%\bt: &\textit{title, year}. \\
+Recommended: &\textit{editor, publisher}.\\ 
+\end{tabular}
+
+
+\underskrift{InProceedings -- conference paper}
+\noindent{}This is similar to \verb=@incollection=.
+\flipp\begin{tabular}{ll}
+\mnd:&\textit{author, title, booktitle, year/date}. \\
+%\bt: &\textit{author, title}. \\
+Recommended: &\textit{editor, publisher, pages}.\\ 
+\end{tabular}
+
+\underskrift{Thesis/Mastersthesis/PhdThesis}
+\noindent{}For \textit{thesis} \blt\ uses  the field \texttt{type} to separate
+different thesis levels.
+\flipp\begin{tabular}{ll}
+\mnd:&\textit{author, title, type, institution,
+  year/date}. \\ 
+%\bt: &\textit{author, title, school, year}. \\ 
+\end{tabular}
+
+\underskrift{Report/TechReport}
+\noindent{}\blt\ uses \texttt{report} and adds a \textbf{type} field to separate
+between types of reports (default value is ''technical report'').
+\flipp\begin{tabular}{ll}
+\blt:&\textit{author, title, type, institution, year/date}\\
+%\bt: &\textit{author, title, institution, year}\\
+Recommended: & \textit{number}(report number)\\ 
+\end{tabular}
+
+
+\subsection{The crossref option}
+If you have several references from the same collection or conference
+it would be rather cumbersome to enter the shared information
+concerning the collection or the conference.
+
+The solution is to enter a reference (book, collection or proceedings)
+that covers the whole document with the shared information, like the book
+title.
+
+The references concerning the parts (chapter, paper) might then
+include the field \textbf{crossref} containing the identifier of the
+shared document. 
+
+\textbf{Biber} will then merge the information from the part and the
+whole (e.g. \textit{inBook/Book}, \textit{inProceedings/Proceedings}
+and \textit{collection/inCollection}). See figure~\ref{crossref}.
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{./chapterinbook.jpg}
+\caption{Using the reference types inBook and Book and the
+  \textbf{crossref} field.}\label{crossref}
+\end{center}
+\end{figure}
+
+\subsection{URLs}\label{biblatex-url}
+All reference types in \blt\ may include the field \textit{url}. When
+using this one should also use the field \textit{urldate} to show when
+this url was last accessed. Date is important by several
+reasons. First of all: web pages have a tendency to change over time,
+you should document which version (date) you are referring to. Second:
+the documents often change their URLs.
+The url-date will be prefixed by the text \textbf{visited on} by
+default (contained in a variable called \texttt{urlseen}. You may
+change this text by the procedure described in section~\ref{tekster}
+ on page~\pageref{tekster}.
+
+It is also recommended that you keep a printed copy of the page for
+later control. 
+
+% In the reference list the URL will by default be prefixed by the text
+% \textbf{URL:}. You may change this by including the following command
+% in the preamble:
+
+% \begin{verbatim}
+%      \DeclareFieldFormat{url}{yourOwnText\url{#1}} 
+% \end{verbatim}
+
+\subsection{The date format}
+The date format depends on the document language and the format. You
+may define the format as options to the \blt-package. In this case you
+may differentiate between \textbf{date}, \textbf{urldate} and other
+dates. More on this issue in \cite[][48--49]{biblatex}.
+
+\section{Exercise 1: Building the bib-file} We will now import some
+references from external sources and enter one by hand. The references
+are found on the accompanying sheet which is also the reference
+section of this document.  The encyclopedia bibliography contains 11
+references
+\cite{hutchins1986,olsen1992,johnson1989,shneiderman1983,hartson1989,jacob1986,myers1995,foley1990,foley1987,shneiderman1992,stephenson1999}. We
+shall take care of a few examples and then download a readymade
+bib-file.
+
+Usually you will download the reference in parallel with downloading
+the full document. \textit{Make it a habit to fetch the reference data
+alongside fetching the document.} It will save you a lot of work later on.
+
+
+\begin{itemize}
+\item\textbf{Hutchins et al., 1986
+    \cite{hutchins1986}}\newline\textit{Google Scholar}\newline Before
+  searching, do this: select \textit{Settings}
+  from the horizontal menu. Scroll down to the section on
+  \textit{Bibliography manager}. Tick off \textit{Show links to import
+    citations into} and select \bt\ in the pull down menu. Save the
+  preferences. 
+
+Search for \textbf{Hutchins Hollan Norman} in Google
+  Scholar via \href{https://www.ub.uio.no/informatics}{Library home page}.\footnote{\url{https://www.ub.uio.no/informatics}}
+
+  Take a look at the first hit in the list. Click the link
+  \textit{Import into \bt}. You will then see the reference with
+  \bt-syntax. Is this the reference we were looking
+  for?\footnote{No. Why not?} Study other reference candidates down
+  the page. Do you notice any peculiarities?\footnote{A lot of
+    citations of the relevant document are listed.} The 26 versions do not contain a reference from 1986.
+
+  We will now try to find the reference in the \textit{Collection of
+    Computer Science Bibliographies} (CCSB).\cite{achilles}
+
+  Click \textbf{Search} in the horizontal menu in the start
+  page. Enter \textit{Hutchins} in the search field and select
+  \textit{author} as qualifier and \textit{1986} as publication year.
+
+  The third hit is the one we're looking for. To the right you will
+  see two links: \textit{\bt} and \textit{5 duplicates}. Study the
+  four duplicates and go back to take a look at the \bt-link. Copy the
+  reference into your bib-file.
+
+\item\textbf{Olsen, 1992 \cite{olsen1992}}\newline Go back to Google
+  Scholar and try to find this reference by searching for
+  \textit{olsen user interface management}. Click \textit{Import into
+    \bt} link. Is it OK?\footnote{Yes.}. Copy the reference to the
+  bib-file.
+
+\item\textbf{Your own master thesis}\newline Select the correct reference
+  type from the menu and enter data in the mandatory fields. Enter
+  the command \kdo{Ctrl-c Ctrl-c} to clean up the record and generate
+  an identifier.
+
+\item\textbf{Johnson et al., 1989 \cite{johnson1989}}\newline This
+  reference you will find in the \textit{IEEE Xplore} service. Search
+  for \textit{johnson xerox star}. 
+
+  Tick the reference and pull down the \textit{Download citations} menu. Select
+  \textit{\bt} and \textit{Citation only}. Finally click
+  \textit{Download}. Copy the reference to the bib-file.
+
+% \item\textbf{Shneiderman 1983 \cite{shneiderman1983}}\newline Search
+%   for \textit{Shneiderman 1983} in \textit{IEEE Xplore} and follow the
+%   procedure above.
+
+\item\textbf{Hartson, 1989 \cite{hartson1989}}\newline This reference
+  we will find in \textit{ACM Digital Library}.
+
+  A general description of the procedure: Click the title of the
+  article in a hit list. The page which appear includes a grey text box to
+  the right, marked \textit{Tools and Resources}. At the bottom of
+  this box there is a \bt-link. Using this link, you will get the
+  \bt-reference in a separate window.
+
+  Move to the \textit{ACM Digital Library} from the library home
+  page. Click \textit{Journals and Transactions} under the
+  \textit{Browse the digital library} header. You will get a list of
+  all the journals of ACM (some called \textit{transactions}). 
+
+  Locate the journal \textit{Computing
+    Surveys}. Navigate
+  to the journal page, then to the publication archive, to the correct
+  issue and finally to the table of contents.
+
+  Study the \bt-reference. Note that ACM abbreviates the journal
+  name. Copy the reference to your bib-file and correct the journal
+  name.
+
+% \item\textbf{Jacob, 1986 \cite{jacob1986}}\newline Locate the journal
+%   \textit{ACM Transactions on Graphics}\footnote{Use Ctrl-f to search
+%     within the list.}. See above.
+
+% \item\textbf{Myers, 1995 \cite{myers1995}}\newline Locate the journal \textit{ACM Transactions on
+%     Computer-Human Interaction}. See above.
+
+% \item\textbf{Foley, 1987 \cite{foley1987}}\newline Use \textit{Collection
+%     of Computer Science Bibliographies} (CCSB). Click \textbf{Search}
+%   in the horisontal menu on the start page. Enter \textit{Foley} in
+%   the search field and select \textit{author} as qualifier and
+%   \textit{1987} as publication year.
+
+% \item\textbf{Foley, 1990 \cite{foley1990}}\newline See
+%   above.
+
+% \item\textbf{Shneiderman, 1992 \cite{shneiderman1992}}\newline See
+%   above.
+
+% \item\textbf{Stephenson, 1999 \cite{stephenson1999}}\newline See
+%   above.
+
+\end{itemize}
+The last references are handled by the same routines. As an exercise
+in the course aftermath, you may locate and copy the references from
+the sources\footnote{You will find \cite{shneiderman1983} in IEEE Xplore,
+  \cite{jacob1986,myers1995} in ACM Digital library and
+  \cite{foley1990,foley1987,shneiderman1992,stephenson1999} in
+  Collection of Computer Science Bibliographies.}. We do not spend
+time on this. You may download a readymade bib-file from this location
+
+{\footnotesize\begin{verbatim}
+        http://folk.uio.no/knuthe/biblatex/eng/
+\end{verbatim}}
+
+Right-click on \textbf{references.bib} and save the file in the \textit{biblatexcourse} directory.
+
+Copy the reference of your thesis into this new
+bib-file.
+\section{Exercise 2: Using the bib-file with a document}
+A rough outline of a \LaTeX\ document using \blt\ is given in
+figure~\ref{document}. 
+
+In this exercise you will use text located in the URL
+
+{\footnotesize\begin{verbatim}
+        http://folk.uio.no/knuthe/biblatex/eng/
+\end{verbatim}}
+
+Right-click on \textbf{userinterface.tex} and save the file in the \textit{biblatexcourse} directory.
+
+Open the file in Emacs. Your job is to replace every doble-*
+reference with a proper citation command.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{./documentstructure.jpg}
+\caption{Rough outline of a \LaTeX-document using \blt.}\label{document}
+\end{center}
+\end{figure}
+
+\subsection{Character encoding}
+In figure~\ref{document} you see the line
+\verb=\usepackage[utf8]{inputenc}=. This means that the character
+encoding of both tex and bib files. If you eventually use another
+character encoding in the bib file, you must state this by giving the
+option \verb=bibencoding= for the biblatex package:
+
+{\footnotesize\begin{verbatim}
+    \usepackage[utf8]{inputenc}
+    \usepackage[bibencoding=latin1]{biblatex}
+\end{verbatim}}
+
+UTF8 is default at IFI.
+
+\subsection{A single or several bib-files}
+After loading the \blt\ package you must tell the system which
+bib-files you are using.  You do this by giving this command in the
+preamble:
+
+{\footnotesize\begin{verbatim}
+    \addbibresource{bib-file name}
+\end{verbatim}}
+
+The bib extension is required. The command accepts only one file at a
+time and you will have to repeat it if you are using several
+bib-files. In that case you may want also to collect all your macros
+in one single file. This file must then be loaded first:
+
+{\footnotesize\begin{verbatim}
+    \addbibresource{macros.bib}
+    \addbibresource{library1.bib}
+    \addbibresource{library2.bib}
+\end{verbatim}}
+
+\subsection{Citing}
+You must use a \texttt{cite} command including the reference
+identifier as a parameter value when you want to put a
+citation into your text: 
+
+{\footnotesize\begin{verbatim}
+   \cite{identifier}
+\end{verbatim}}
+
+\noindent{}The identifier must be written exactly as it appears in
+the bib-file (case sensitive).
+
+If you want to cite several references in the same cite command, it
+would look like this --- no space after the comma:
+
+{\footnotesize\begin{verbatim}
+   \cite{identifier1,identifier2}
+\end{verbatim}}
+
+\noindent{}If you want a prefix or suffix in the citation the cite command accepts two other parameters:
+
+{\footnotesize\begin{verbatim}
+   \cite[prefix][suffix]{identifier}
+\end{verbatim}}
+
+\noindent{}If you want to refer to a certain page in the cited document, you
+would then write something like this:
+
+{\footnotesize\begin{verbatim}
+   \cite[See also][47]{identifier}
+\end{verbatim}}
+
+\noindent{}and this would be printed as \verb=[See also 19, p. 47]=. For more \verb=\cite=-commands, see \cite[][13]{langmyhr13}.
+
+If you want a reference to appear in your reference list
+without explicitly citing it, you may write:
+
+{\footnotesize\begin{verbatim}
+   \nocite{identifier}
+\end{verbatim}}
+
+If you replace \textit{identifier} with *, all of the references in
+your bib-file will a appear in your reference list.
+
+\subsection{RefTeX -- Locating and using a reference }
+\subsubsection*{Emacs RefTeX mode}
+An Emacs add-on (RefTeX) makes it easy to handle
+citations\cite{reftex}. The package is recommended also by other
+reasons. It handles internal crossreferences in the \LaTeX\ file and makes
+it easy to use table of contents in Emacs.
+
+Before setting Emacs in RefTeX mode, you must make a twist. RefTeX
+depends on knowing which bib-files you are using. RefTeX supports the
+\bt\ logic and will collect the bib-files from the
+\kdo{$\backslash$bibliography}-command. 
+To tell RefTeX to pick up the bib-file from the
+\kdo{$\backslash$addbibresource} you must put the following in your
+.emacs file:
+
+{\footnotesize\begin{verbatim}
+(setq reftex-bibliography-commands 
+   '("addbibresource" "bibliography" "nobibliography")) 
+\end{verbatim}}
+
+The snag here is that RefTeX only picks the first bib-file given by
+\textbf{addbibresource}. If you use several bib-files, you must give
+them in a single \textbf{bibliography} command\footnote{The command
+  must be given in the preamble. No bib extension is needed.}:
+
+{\footnotesize\begin{verbatim}
+      \bibliography{macros,references}
+\end{verbatim}}
+
+\noindent{}You put Emacs in RefTEX mode by giving the command {\footnotesize \verb=M-x reftex-mode=}.\footnote{M-x means first pressing the ESC-button and then the x}
+
+\noindent{}Please note the new top menu (Ref). 
+
+You may set Emacs in RefTeX mode initially by adding these commands to
+the .emacs file:
+
+{\footnotesize\begin{verbatim}
+   (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
+   (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
+   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+\end{verbatim}}
+
+
+\subsubsection*{Searching the bib-files}
+The RefTeX mode will make it possible to locate references by
+searching the bib-file with regular expressions.
+
+Place the cursor where you want the cite-command to appear. Select \verb=\cite=
+from the Ref menu (or use the command  \verb=C-c [=). Enter the regular
+expression plus Return. Eventually you will get a hit list. You may
+navigate in the hit list by using the up/down arrows and selecting a
+reference by hitting Return. A cite command will appear with the correct
+identifier. 
+
+  If you require two or more citations in your cite-command, just
+  place the cursor before the last curly brace and repeat the RefTeX
+  cite-command.
+
+Now, replace the doble-* citations with proper cite-commands in the
+rest of the text.
+
+\subsection{Bibliographic styles}
+Styles for citations and references are loaded as an option to the
+\blt\ package:
+
+{\footnotesize\begin{verbatim}
+      \usepackage[...,
+       style=styleoption,
+       ...]{biblatex}
+\end{verbatim}}
+
+The \kdo{style} gives the styles for both citations and references at
+the same time. But they might be differentiated:
+
+{\footnotesize\begin{verbatim}
+      citestyle=styleoption-1,
+      bibstyle=styleoption-2,
+\end{verbatim}}
+
+\noindent{}Here is a list of the most common styles\footnote{To see more styles
+  check out \blt\ package manual \cite[][63--68]{biblatex}.}:
+
+\begin{description}
+\item[numeric] -- the citation is given as a number in brackets
+  ($[23]$). This number points to a numbered list of references. The
+  sorting of the references might be decided as an option in the
+  preamble. In \textit{this} document \textbf{none} is chosen as the
+  sort option, which means that references appears in the order they
+  are cited.
+
+\item[alphabetic] -- the citation is a combination of parts of the
+  author name and the publication year ($[$KNU99$]$). The references
+  are sorted according to this combination.
+
+\item[authortitle] -- the citation is the last name of the author
+  followed by the title of the work in italics. To get parentheses
+  around the citation you must use the \verb=\parencite= instead of
+  \verb=\cite=.\footnote{Or you may type the parenthesis yourself around the \kdo{cite} command.} The references are sorted by name and title.
+
+\item[authoryear] -- the citation is a the last name of the author
+  followed by the year of publication. You must use the
+  \verb=\parencite= to get parentheses around the citation. The
+  references are sorted by name and year.
+\end{description}
+
+If you want to use one of the styles APA  (American Psychological Association) or Chicago, check out the local guide.\cite{langmyhr13}
+
+\subsection{Generating the reference list}
+Put this command in the \LaTeX-file where you want the reference
+list to appear:
+
+{\footnotesize\begin{verbatim}
+   \printbibliography
+\end{verbatim}}
+
+You then run the following commands in your terminal window:
+
+{\footnotesize\begin{verbatim}
+   > pdflatex userinterface.tex
+   > biber userinterface
+   > pdflatex userinterface.tex
+   > pdflatex userinterface.tex
+\end{verbatim}}
+
+This is what happens: The first pdflatex command produces some
+intermediate files that the \textbf{biber} program uses to pick the
+cited references from the bib-files and formating them according to
+the styles. The result will be included in the next pdflatex
+processing.
+
+If the processing is without error messages, you might inspect the
+result in the userinterface.pdf file.
+
+In Linux command mode at IFI you may give the command 
+{\footnotesize\begin{verbatim}
+   > ltx  userinterface.tex 
+\end{verbatim}}
+which takes care of all the steps above.
+
+\subsection{Using other styles}
+% When changing styles it is a good idea to delete  intermediate
+% files  ahead of a new processing:
+% 
+% {\footnotesize\begin{verbatim}
+%    > rm  *.aux *.bbl *.bcf *.blg 
+% \end{verbatim}}
+
+Try to change the style to \textit{alphabetic} and process the tex
+file. Check the result, both citations and references.
+
+Try changing the style to \textit{authoryear} and process the
+file. Please note that you no longer get brackets around your
+citation. Change one or more \kdo{$\backslash$cite} commands to
+\kdo{$\backslash$parencite} and re-process. Check also the sorting order of the
+reference list.
+
+Finally, change back to the \textit{numeric} style. You need not change the \kdo{$\backslash$parencite} command.
+
+\subsection{The reference list header}
+The header of the reference list is taken from the value of a
+\LaTeX-variable which in turn is  loaded to the \blt-variable
+\kdo{bibliography}. 
+
+The name of the variable is \verb=\refname= when using the document
+class \textit{article}, and \verb=\bibname=  for the \textit{book}
+document class. The default values of these variables are
+\textit{References} and \textit{Bibliography} respectively.
+
+You may give these variables new values by using the
+\texttt{renewcommand} like this:
+
+{\footnotesize\begin{verbatim}
+   \renewcommand{\refname}{Literature}
+\end{verbatim}}
+
+\noindent{}You may also state  the header explicitly in the
+ \kdo{printbibliography} command: 
+
+{\footnotesize\begin{verbatim}
+   \printbibliography[title={Literature}]
+\end{verbatim}}
+
+\noindent{}A third possibility is mentioned on page~\pageref{heading}.
+
+
+\subsection{Including the reference list in the contents}
+The reference list will not automatically be included in the table of
+contents. To add an entry you give the command \kdo{addcontentsline}
+directly after the \kdo{printbibliography} command in the \LaTeX
+file. To ensure consistency, define the \verb=\refname= (or
+\verb=\bibname= ) variable first:
+
+{\footnotesize\begin{verbatim}
+   \renewcommand{\refname}{Literature}
+   \printbibliography
+   \addcontentsline{toc}{section}{\refname}
+\end{verbatim}}
+
+The \textit{toc} tells the system to put a line in the
+table-of-contents. The \textit{section} states which document level to
+be used and lastly what to put there: the value of the variable
+\verb=\refname=.
+
+\subsection{Referring backwards}
+When your document grows, it will be difficult to remember just where
+you cited a certain reference. 
+
+You may use the package \textit{hyperref}\cite{hyperref} which generates backward
+citations. That is, for every reference in the reference list page
+numbers are added to show where the reference is cited. To achieve
+this, you add the following command in the \LaTeX\ preamble:
+
+{\footnotesize\begin{verbatim}
+   \usepackage{hyperref}
+\end{verbatim}}
+
+\noindent{}after loading the \blt-package. You must also give the
+option \kdo{backref} to \blt. The hyperref package also generates
+internal and external links in the document.
+
+Take a look at the reference list in this document to see how it
+works. 
+
+\subsection{Section-, type- or chapterwise reference lists}
+
+\subsubsection*{Reference list in each section}
+You may generate reference lists for each chapter or section by
+marking the start and end of a \textit{refsection} and print the
+bibliography within such a section:
+
+{\footnotesize\begin{verbatim}
+   \chapter{...}
+      \begin{refsection}
+      ...
+      \printbibliography
+      \end{refsection}
+
+   \chapter{...}
+      \begin{refsection}
+      ...
+      \printbibliography
+      \end{refsection}
+\end{verbatim}}
+
+All citations given within the reference section will be included in
+the reference list of that chapter or section.
+
+Any citations appearing outside a reference section will be included
+in an overall bibliography.
+
+\subsubsection*{Sectionwise reference lists at the end}
+If you want a chapter- or sectionwise bibliography in the end of the
+document, you still define reference sections as above, but you do not
+usually print them in each section. This is what you might do in the
+end of your document:
+
+{\footnotesize\begin{verbatim}
+   \printbibheading
+   \printbibliography[section=1, heading=subbibliography]
+   \printbibliography[section=2, heading=subbibliography]
+   \printbibliography[section=3, heading=subbibliography]
+   ...
+\end{verbatim}}
+
+The first command prints the general bibliography header,
+e.g. \textbf{References}.
+
+The commands following will print the references for the relevant
+section with the header defined by the variable
+\textit{subbibliography}. This header might be defined in the preamble
+as follows:\label{heading}
+
+
+{\footnotesize\begin{verbatim}
+   \defbibheading{subbibliography}{%
+     \section*{References for Chapter %
+     \ref{refsection:\therefsection}}}
+\end{verbatim}}
+
+\noindent{}Try this with your userinterface file!
+\subsubsection*{Document type or topics reference lists}
+You may produce separate lists depending on document type as used in
+the bib-file: books, articles etc. Enter the command \verb=\nocite{*}=
+and try this in the \texttt{userinterface.tex} file (the commands are already added as comments at the end of the file):
+
+{\footnotesize\begin{verbatim}
+   \printbibheading
+   \printbibliography[type=book, title={Books}]
+   \printbibliography[type=article, title={Articles}]
+   \printbibliography[type=manual, title={Manuals}]
+   \printbibliography[nottype=book, nottype=article, %
+    nottype=manual, title={Other documents}]
+\end{verbatim}}
+
+To ensure a running sequence of reference numbers you must use the option \texttt{defernumbers=true} to the biblatex-package.
+
+You may also make a bibliography with the references separated according to different topics entered in the \texttt{keywords} field:
+
+{\footnotesize\begin{verbatim}
+   \printbibheading
+   \printbibliography[keyword=comm, title={Communication}]
+   \printbibliography[keyword=soft, title={Software}]
+   
+\end{verbatim}}
+
+\subsection{Changing the value of  bibliography strings}\label{tekster}
+There is a lot of text strings you may redefine. Most of them will
+contain reasonable default values, so be careful. Here is an example
+showing how you can redefine some strings\footnote{You will find a
+  list of such strings in section~4.9 in the
+  \blt-manual\cite[][see section 4.9, p.208]{biblatex}}:
+
+{\footnotesize\begin{verbatim}
+    \DefineBibliographyStrings{english}{%
+        urlseen={Seen:},
+        bibliography = {Literature},
+        references = {Literature},
+        page={page},
+        pages={pages},
+        and={\&},
+}
+\end{verbatim}}
+
+As you see from the command, such text strings must be associated
+with the document language, in this case \textit{english}.
+
+
+% ************************ end of main text
+\vfill
+
+{\footnotesize
+\begin{center}
+August 2016\\
+/undervisning/biblatex-kurs/biblatexbooklet.tex
+\end{center}
+}
+\newpage
+(notes)
+\newpage
+\renewcommand{\refname}{Literature}
+
+\printbibliography\addcontentsline{toc}{section}{\refname}
+{\footnotesize
+\subsubsection*{A few general Emacs-commands}
+\begin{tabular}{|l|l|}\hline
+Ctrl-X Ctrl-f &Open\\ \hline
+Ctrl-x Ctrl-s &Save\\ \hline
+Ctrl-y & Paste\\ \hline
+Ctrl-\_& Undo (Ctrl-underscore)\\ \hline
+Ctrl-s & Search buffer\\ \hline
+Ctrl-c $[$ & Search bib-file (reftex-cite)\\ \hline
+\end{tabular}
+\subsubsection*{Emacs bib-file commands}
+\begin{tabular}{|l|p{7cm}|} \hline
+TAB& puts the cursor at the end of the current field\\ \hline
+Ctrl-J& puts the cursor at the beginning of the next field\\ \hline
+Ctrl-C Ctrl-C &concludes the entering of a reference. You will
+be warned about empty mandatory fields. Emacs will propose an
+identifier if you have not entered one yourself. Empty optional fields
+will be removed.\\ \hline
+Syntax check&If you select the menu \kdo{BibTeX-Edit \pil Operating on Buffer or
+  Region \pil Validate Entries} a syntax check is performed on the bib-file.\\ \hline
+Format entries&If you select the menu \kdo{BibTeX-Edit \pil Operating on Buffer or
+  Region \pil Format Entries} the references will be formatted.\\ \hline
+\end{tabular}
+}
+\end{document}
