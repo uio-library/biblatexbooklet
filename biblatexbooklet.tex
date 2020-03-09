@@ -207,7 +207,7 @@ command\footnote{Under Windows, select \textit{emacs.exe} from the program menu}
 \verb=       > emacs myreferences.bib & =
 
 \noindent{}Emacs uses a certain \bt-mode when you open a bib-file. You will see a menu called \textit{Entry-Types}. When you want to
-enter a new reference in your bib-file, you choose reference type from
+enter a new reference in your bib-file, you choose the reference type from
 this menu. The last option in this menu is \bt-dialect. The default selection of document types and fields are \bt, but may be changed to \blt\ by using the last choice in the \textit{Entry-types} menu (from version 24.2 of Emacs). Select \blt.
 
 After chosing a reference type you will see a list of empty fields,
@@ -219,14 +219,13 @@ Ctrl-a):
       author =       {},
       title =        {},
       journaltitle = {},
-      year =         {},
-      OPTkey =       {},
+      ALTyear =      {},
+      ALTdate =      {},
       OPTvolume =    {},
       OPTnumber =    {},
       OPTpages =     {},
       OPTmonth =     {},
-      OPTnote =      {},
-      OPTannote =    {}
+      ...
     }
 \end{verbatim}}
 
@@ -276,9 +275,9 @@ initials. The bibliographic style will decide whether the names will
 be presented with initials or not. If you do not know the full name, try normalising.
 
 \subsection*{Uppercase letters}
-Information in some of the fields will be edited according to the
+Information in some of the fields will be edited by \bt\ according to the
 style you have chosen. Uppercase letters might be converted to
-lowercase. If you want to keep your own layout (e.g. acronyms like ACM
+lowercase. This does not happen i \blt. If you want to keep your own layout (e.g. acronyms like ACM
 and IEEE or person names in titles) put curly braces around
 your text.
 
@@ -290,10 +289,10 @@ must appear in the beginning of the bib-file. Examples:
 
 {\footnotesize
 \begin{verbatim}
-    @string{ben   = "Ben Shneiderman"}
-    @string{ojd   = "Ole-Johan Dahl"}
-    @string{tochi = "ACM Transactions on Computer-Human Interaction"}
-    @string{aw    = "Addison-Wesley"}
+  @string{ben   = "Shneiderman, Ben"}
+  @string{ojd   = "Dahl, Ole-Johan"}
+  @string{tochi = "ACM Transactions on Computer-Human Interaction"}
+  @string{aw    = "Addison-Wesley"}
 \end{verbatim}
 }
 
@@ -446,7 +445,7 @@ later control.
 The date format depends on the document language and the format. You
 may define the format as options to the \blt-package. In this case you
 may differentiate between \textbf{date}, \textbf{urldate} and other
-dates. More on this issue in \cite[][48--49]{biblatex}.
+dates. More on this issue in \cite[][50--53]{biblatex}.
 
 \section{Exercise 1: Building the bib-file} We will now import some
 references from external sources and enter one by hand. The references
@@ -573,8 +572,7 @@ time on this. You may download a readymade bib-file from this location
 {\footnotesize\begin{verbatim}
         http://folk.uio.no/knuthe/biblatex/eng/
 \end{verbatim}}
-
-Right-click on \textbf{references.bib} and save the file in the \textit{biblatexcourse} directory.
+\noindent{}Right-click on \textbf{references.bib} and save the file in the \textit{biblatexcourse} directory.
 
 Copy the reference of your thesis into this new
 bib-file.
@@ -587,15 +585,14 @@ In this exercise you will use text located in the URL
 {\footnotesize\begin{verbatim}
         http://folk.uio.no/knuthe/biblatex/eng/
 \end{verbatim}}
-
-Right-click on \textbf{userinterface.tex} and save the file in the \textit{biblatexcourse} directory.
+\noindent{}Right-click on \textbf{userinterface.tex} and save the file in the \textit{biblatexcourse} directory.
 
 Open the file in Emacs. Your job is to replace every doble-*
 reference with a proper citation command.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{./documentstructure.jpg}
+\includegraphics[width=\textwidth]{./documentstructure.jpg}
 \caption{Rough outline of a \LaTeX-document using \blt.}\label{document}
 \end{center}
 \end{figure}
@@ -611,8 +608,7 @@ option \verb=bibencoding= for the biblatex package:
     \usepackage[utf8]{inputenc}
     \usepackage[bibencoding=latin1]{biblatex}
 \end{verbatim}}
-
-UTF8 is default at IFI.
+\noindent{}UTF8 is default at IFI.
 
 \subsection{A single or several bib-files}
 After loading the \blt\ package you must tell the system which
@@ -622,8 +618,7 @@ preamble:
 {\footnotesize\begin{verbatim}
     \addbibresource{bib-file name}
 \end{verbatim}}
-
-The bib extension is required. The command accepts only one file at a
+\noindent{}The bib extension is required. The command accepts only one file at a
 time and you will have to repeat it if you are using several
 bib-files. In that case you may want also to collect all your macros
 in one single file. This file must then be loaded first:
@@ -642,7 +637,6 @@ citation into your text:
 {\footnotesize\begin{verbatim}
    \cite{identifier}
 \end{verbatim}}
-
 \noindent{}The identifier must be written exactly as it appears in
 the bib-file (case sensitive).
 
@@ -652,21 +646,18 @@ would look like this --- no space after the comma:
 {\footnotesize\begin{verbatim}
    \cite{identifier1,identifier2}
 \end{verbatim}}
-
 \noindent{}If you want a prefix or suffix in the citation the cite command accepts two other parameters:
 
 {\footnotesize\begin{verbatim}
    \cite[prefix][suffix]{identifier}
 \end{verbatim}}
-
 \noindent{}If you want to refer to a certain page in the cited document, you
 would then write something like this:
 
 {\footnotesize\begin{verbatim}
-   \cite[See also][47]{identifier}
+   \cite[See also][47]{identifier
 \end{verbatim}}
-
-\noindent{}and this would be printed as \verb=[See also 19, p. 47]=. For more \verb=\cite=-commands, see \cite[][13]{langmyhr13}.
+\noindent{}and this would be printed as \verb=[See also 19, p. 47]=. For more \verb=\cite=-commands, see \cite[][14]{langmyhr13}.
 
 If you want a reference to appear in your reference list
 without explicitly citing it, you may write:
@@ -674,8 +665,7 @@ without explicitly citing it, you may write:
 {\footnotesize\begin{verbatim}
    \nocite{identifier}
 \end{verbatim}}
-
-If you replace \textit{identifier} with *, all of the references in
+\noindent{}If you replace \textit{identifier} with *, all of the references in
 your bib-file will a appear in your reference list.
 
 \subsection{RefTeX -- Locating and using a reference }
@@ -748,8 +738,7 @@ Styles for citations and references are loaded as an option to the
        style=styleoption,
        ...]{biblatex}
 \end{verbatim}}
-
-The \kdo{style} gives the styles for both citations and references at
+\noindent{}The \kdo{style} gives the styles for both citations and references at
 the same time. But they might be differentiated:
 
 {\footnotesize\begin{verbatim}
@@ -758,7 +747,7 @@ the same time. But they might be differentiated:
 \end{verbatim}}
 
 \noindent{}Here is a list of the most common styles\footnote{To see more styles
-  check out \blt\ package manual \cite[][63--68]{biblatex}.}:
+  check out \blt\ package manual \cite[][65--70]{biblatex}.}:
 
 \begin{description}
 \item[numeric] -- the citation is given as a number in brackets
@@ -801,8 +790,7 @@ You then run the following commands in your terminal window:
    > pdflatex userinterface.tex
    > pdflatex userinterface.tex
 \end{verbatim}}
-
-This is what happens: The first pdflatex command produces some
+\noindent{}This is what happens: The first pdflatex command produces some
 intermediate files that the \textbf{biber} program uses to pick the
 cited references from the bib-files and formating them according to
 the styles. The result will be included in the next pdflatex
@@ -815,7 +803,7 @@ In Linux command mode at IFI you may give the command
 {\footnotesize\begin{verbatim}
    > ltx  userinterface.tex 
 \end{verbatim}}
-which takes care of all the steps above.
+\noindent{}which takes care of all the steps above.
 
 \subsection{Using other styles}
 % When changing styles it is a good idea to delete  intermediate
@@ -852,14 +840,12 @@ You may give these variables new values by using the
 {\footnotesize\begin{verbatim}
    \renewcommand{\refname}{Literature}
 \end{verbatim}}
-
 \noindent{}You may also state  the header explicitly in the
  \kdo{printbibliography} command: 
 
 {\footnotesize\begin{verbatim}
    \printbibliography[title={Literature}]
 \end{verbatim}}
-
 \noindent{}A third possibility is mentioned on page~\pageref{heading}.
 
 
@@ -875,8 +861,7 @@ file. To ensure consistency, define the \verb=\refname= (or
    \printbibliography
    \addcontentsline{toc}{section}{\refname}
 \end{verbatim}}
-
-The \textit{toc} tells the system to put a line in the
+\noindent{}The \textit{toc} tells the system to put a line in the
 table-of-contents. The \textit{section} states which document level to
 be used and lastly what to put there: the value of the variable
 \verb=\refname=.
@@ -893,7 +878,6 @@ this, you add the following command in the \LaTeX\ preamble:
 {\footnotesize\begin{verbatim}
    \usepackage{hyperref}
 \end{verbatim}}
-
 \noindent{}after loading the \blt-package. You must also give the
 option \kdo{backref} to \blt. The hyperref package also generates
 internal and external links in the document.
@@ -921,8 +905,7 @@ bibliography within such a section:
       \printbibliography
       \end{refsection}
 \end{verbatim}}
-
-All citations given within the reference section will be included in
+\noindent{}All citations given within the reference section will be included in
 the reference list of that chapter or section.
 
 Any citations appearing outside a reference section will be included
@@ -941,8 +924,7 @@ end of your document:
    \printbibliography[section=3, heading=subbibliography]
    ...
 \end{verbatim}}
-
-The first command prints the general bibliography header,
+\noindent{}The first command prints the general bibliography header,
 e.g. \textbf{References}.
 
 The commands following will print the references for the relevant
@@ -956,7 +938,6 @@ as follows:\label{heading}
      \section*{References for Chapter %
      \ref{refsection:\therefsection}}}
 \end{verbatim}}
-
 \noindent{}Try this with your userinterface file!
 \subsubsection*{Document type or topics reference lists}
 You may produce separate lists depending on document type as used in
@@ -971,8 +952,7 @@ and try this in the \texttt{userinterface.tex} file (the commands are already ad
    \printbibliography[nottype=book, nottype=article, %
     nottype=manual, title={Other documents}]
 \end{verbatim}}
-
-To ensure a running sequence of reference numbers you must use the option \texttt{defernumbers=true} to the biblatex-package.
+\noindent{}To ensure a running sequence of reference numbers you must use the option \texttt{defernumbers=true} to the biblatex-package.
 
 You may also make a bibliography with the references separated according to different topics entered in the \texttt{keywords} field:
 
@@ -980,7 +960,6 @@ You may also make a bibliography with the references separated according to diff
    \printbibheading
    \printbibliography[keyword=comm, title={Communication}]
    \printbibliography[keyword=soft, title={Software}]
-   
 \end{verbatim}}
 
 \subsection{Changing the value of  bibliography strings}\label{tekster}
@@ -988,7 +967,7 @@ There is a lot of text strings you may redefine. Most of them will
 contain reasonable default values, so be careful. Here is an example
 showing how you can redefine some strings\footnote{You will find a
   list of such strings in section~4.9 in the
-  \blt-manual\cite[][see section 4.9, p.208]{biblatex}}:
+  \blt-manual\cite[][see section 4.9, p.215]{biblatex}}:
 
 {\footnotesize\begin{verbatim}
     \DefineBibliographyStrings{english}{%
@@ -1000,8 +979,7 @@ showing how you can redefine some strings\footnote{You will find a
         and={\&},
 }
 \end{verbatim}}
-
-As you see from the command, such text strings must be associated
+\noindent{}As you see from the command, such text strings must be associated
 with the document language, in this case \textit{english}.
 
 
@@ -1010,7 +988,7 @@ with the document language, in this case \textit{english}.
 
 {\footnotesize
 \begin{center}
-August 2016\\
+February 2017\\
 /undervisning/biblatex-kurs/biblatexbooklet.tex
 \end{center}
 }
